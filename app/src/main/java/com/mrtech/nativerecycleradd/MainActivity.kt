@@ -1,10 +1,16 @@
+/*
+ * Created by Tarif Chakder at 6/12/20 11:25 AM
+ * Copyright © MR Tech 2020
+ */
+
 package com.mrtech.nativerecycleradd
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
 import com.google.android.gms.ads.AdRequest
@@ -26,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         // The number of native ads to load.
-        const val NO_OF_ADD = 5
+        const val NO_OF_ADD = 4
     }
 
     // The AdLoader used to load ads.
@@ -39,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     private val mNativeAds: MutableList<UnifiedNativeAd> = ArrayList()
 
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -62,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private fun recyclerItems(): List<Any> {
         // insert menuItem
         menuItem()
@@ -76,13 +84,13 @@ class MainActivity : AppCompatActivity() {
                 mNativeAds.add(unifiedNativeAd)
                 if (!adLoader!!.isLoading) {
                     try {
-                        if (mRecyclerViewItems.size >= 6) {
+                        if (mRecyclerViewItems.size >= 4) {
                             if (mNativeAds.size <= 0) {
                                 return@OnUnifiedNativeAdLoadedListener
                             }
                             val offset: Int =
                                 mRecyclerViewItems.size / mNativeAds.size + 1
-                            var index = 6
+                            var index = 4
                             for (ad in mNativeAds) {
                                 mRecyclerViewItems.add(index, ad)
                                 index = index.plus(offset)
